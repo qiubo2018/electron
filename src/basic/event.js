@@ -1,4 +1,4 @@
-const remote = require("electron").remote;
+const remote = require('electron').remote;
 
 function onClick_getSize() {
     const win = remote.getCurrentWindow();
