@@ -8,11 +8,12 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true
         }
-    })
+    });
 
     // 加载index.html文件
-    win.loadFile('index.html')
-
+    win.loadFile('index.html');
+    // 显示调试窗口
+    win.webContents.openDevTools();
 
 }
 
