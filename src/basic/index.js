@@ -2,6 +2,8 @@ const {app, BrowserWindow} = require('electron')
 
 function createWindow() {
     // 创建浏览器窗口
+    // width height minWidth  maxWidth默认单位px
+    //x y 在屏幕上的位置
     let win = new BrowserWindow({
         width: 800,
         height: 600,
