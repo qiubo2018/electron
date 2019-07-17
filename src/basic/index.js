@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron');
 
 function createWindow() {
     // 创建浏览器窗口
@@ -9,7 +9,14 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: true
-        }
+        },
+        //边框
+        // frame: false,
+        //全屏+锁定
+        // fullscreen: true,
+        // kiosk: true
+        title: 'aaaa',
+        icon: '../img/icon.png'
     });
 
     // 加载index.html文件

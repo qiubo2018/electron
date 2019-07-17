@@ -14,3 +14,15 @@ function onClick_setSize() {
     win.setPosition(0, 0)
 
 }
+
+function onClick_setKiosk(e) {
+    const win = remote.getCurrentWindow();
+    if (win.isKiosk()) {
+        win.setKiosk(false);
+        e.innerHTML = '设置窗口全屏及锁定';
+
+    } else {
+        win.setKiosk(true);
+        e.innerHTML = '窗口已销定';
+    }
+}
