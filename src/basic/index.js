@@ -26,7 +26,7 @@ function createWindow() {
         height: 400,
         icon: '../img/icon.png',
         parent: parentWin,
-        modal: true,
+        // modal: true,
         autoHideMenuBar: true
     });
 

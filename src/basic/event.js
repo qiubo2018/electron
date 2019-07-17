@@ -1,4 +1,5 @@
 const remote = require('electron').remote;
+const BrowserWindow = remote.BrowserWindow;
 
 function onClick_getSize() {
     const win = remote.getCurrentWindow();
@@ -25,4 +26,37 @@ function onClick_setKiosk(e) {
         win.setKiosk(true);
         e.innerHTML = '窗口已销定';
     }
+}
+
+function onClick_Close() {
+    const win = remote.getCurrentWindow();
+    win.close();
+}
+
+function onClick_CloseManyWindow() {
+    if (global.windows != undefined) {
+        for (var i = 0; i < global.windows.length; i++) {
+            global.windows[i].close();
+        }
+        global.windows.length = 0;
+        global.windows = undefined;
+    }
+
+}
+
+function onClick_CreateManyWindow() {
+    if (global.windows == undefined) {
+        global.windows = [];
+    }
+    var win = new BrowserWindow({
+        show: false,
+        width: 200,
+        height: 200
+    });
+    global.windows.push(win);
+    win.loadFile('./index3.html');
+    win.on('ready-to-show', () => {
+        win.show();
+    })
+
 }
