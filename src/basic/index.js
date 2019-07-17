@@ -4,8 +4,8 @@ function createWindow() {
     // 创建浏览器窗口
     // width height minWidth  maxWidth默认单位px
     //x y 在屏幕上的位置
-    let win = new BrowserWindow({
-        width: 1200,
+    let parentWin = new BrowserWindow({
+        width: 1350,
         height: 800,
         webPreferences: {
             nodeIntegration: true
@@ -21,15 +21,22 @@ function createWindow() {
         icon: '../img/icon.png',
         show: false
     });
+    childWin = new BrowserWindow({
+        width: 400,
+        height: 400,
+        parent: parentWin,
+    });
 
     // 加载index.html文件
-    win.loadFile('index.html');
-    win.on('ready-to-show', () => {
-        win.show();
+    // parentWin.loadFile('index.html');
+    parentWin.loadURL('http://101.132.75.71/index/login/index.html')
+    childWin.loadFile('index2.html');
+    parentWin.on('ready-to-show', () => {
+        parentWin.show();
     });
 
     // 显示调试窗口
-    win.webContents.openDevTools();
+    parentWin.webContents.openDevTools();
 
 }
 
