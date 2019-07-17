@@ -24,19 +24,21 @@ function createWindow() {
     childWin = new BrowserWindow({
         width: 400,
         height: 400,
+        icon: '../img/icon.png',
         parent: parentWin,
+        modal: true
     });
 
     // 加载index.html文件
-    // parentWin.loadFile('index.html');
-    parentWin.loadURL('http://101.132.75.71/index/login/index.html')
+    parentWin.loadFile('index.html');
+    // parentWin.loadURL('http://101.132.75.71/index/login/index.html')
     childWin.loadFile('index2.html');
     parentWin.on('ready-to-show', () => {
         parentWin.show();
     });
 
     // 显示调试窗口
-    parentWin.webContents.openDevTools();
+    // parentWin.webContents.openDevTools();
 
 }
 
