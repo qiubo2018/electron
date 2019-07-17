@@ -2,9 +2,10 @@ const remote = require('electron').remote;
 const BrowserWindow = remote.BrowserWindow;
 const ipcMain = remote.ipcMain;
 const {ipcRenderer} = require('electron');
-ipcMain.on('other', str => {
-    document.getElementById('laber_return').innerHTML = str;
-})
+ipcMain.on('other', (event, str) => {
+    const laber = document.getElementById('laber_return');
+    laber.innerHTML += str;
+});
 
 function onClick_getSize() {
     const win = remote.getCurrentWindow();
@@ -70,18 +71,21 @@ function onClick_SendData() {
     var win = new BrowserWindow({
         width: 800,
         height: 800,
-        show: false
+        show: false,
+        webPreferences: {
+            nodeIntegration: true
+        },
     });
     win.loadFile('other.html');
     win.once('ready-to-show', () => {
         win.show();
-        win.webContents.send('data', {nam: 'bill', age: 25});
+        win.webContents.send('data', {name: 'bill', age: 25});
     });
     win.webContents.openDevTools();
 }
 
 function onLoad() {
-    ipcRendere.on('data', (event, obj) => {
+    ipcRenderer.on('data', (event, obj) => {
         const name = document.getElementById('name');
         const age = document.getElementById('age');
         name.innerHTML = obj.name;
