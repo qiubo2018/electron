@@ -10,11 +10,13 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true
         },
+        // 更多设置可以参考：https://electronjs.org/docs/api/browser-window#winsetkioskflag
         //边框
         // frame: false,
         //全屏+锁定
         // fullscreen: true,
         // kiosk: true
+        //title 如果在网页中设置了，这里无效
         title: 'aaaa',
         icon: '../img/icon.png'
     });
@@ -26,4 +28,16 @@ function createWindow() {
 
 }
 
-app.on('ready', createWindow)
+app.on('ready', createWindow);
+app.on('window-all-closed', () => {
+    console.log('window-all-closed');
+    if (process.platform != 'darwin') {
+        app.quit();
+    }
+});
+app.on('activate', () => {
+    console.log('activate');
+    if (win == null) {
+        createWindow();
+    }
+});
