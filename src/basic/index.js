@@ -17,7 +17,7 @@ function createWindow() {
         // fullscreen: true,
         // kiosk: true
         //title 如果在网页中设置了，这里无效
-        title: 'aaaa',
+        title: 'electron默认title',
         icon: '../img/icon.png',
         show: false
     });

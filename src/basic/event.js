@@ -2,6 +2,7 @@ const remote = require('electron').remote;
 const BrowserWindow = remote.BrowserWindow;
 const ipcMain = remote.ipcMain;
 const {ipcRenderer} = require('electron');
+const dialog = remote.dialog;
 ipcMain.on('other', (event, str) => {
     const laber = document.getElementById('laber_return');
     laber.innerHTML += str;
@@ -97,4 +98,25 @@ function onClick_CloseOther() {
     const win = remote.getCurrentWindow();
     ipcRenderer.send('other', '窗口已关闭');
     win.close();
+}
+
+function onClick_OpenFile() {
+    const onClick_OpenFile = document.getElementById('onClick_OpenFile');
+    var options = {};
+    options.title = "打开文件夹";
+    options.properties = ['openFIle', 'multiSelections'];
+    options.buttonLabel = '选择您要的文件';
+    options.filters = [
+        {name: 'Images', extensions: ['jpg', 'png', 'gif']},
+        {name: 'Movies', extensions: ['mkv', 'avi', 'mp4']},
+        {name: 'Custom File Type', extensions: ['as']},
+        {name: 'All Files', extensions: ['*']}
+    ];
+    //如果是苹果系统，增加添加文件夹功能
+    if (process.platform == 'darwon') {
+        options.properties.push('openDirectory');
+    }
+    onClick_OpenFile.innerHTML = dialog.showOpenDialog(options, (file) => {
+        console.log(file);
+    })
 }
